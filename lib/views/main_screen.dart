@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -11,8 +13,45 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return const AdminScaffold(
-      body: Text('Dashboard'),
+    return AdminScaffold(
+      backgroundColor: Colors.grey.shade300,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text('مدیریت'),
+      ),
+      body: const Text('داشبورد'),
+      sideBar: const SideBar(
+        backgroundColor: Colors.white,
+        textStyle: TextStyle(fontSize: 28, color: Colors.black),
+        activeTextStyle: TextStyle(color: Colors.white, fontSize: 14),
+        activeIconColor: Colors.white,
+        activeBackgroundColor: Color(0xff003F62),
+        width: 260,
+        items: [
+          AdminMenuItem(
+
+            title: 'فروشندگان',
+            route: '',
+            icon: CupertinoIcons.person_3,
+          ),
+          AdminMenuItem(
+            title: 'خریداران',
+            route: '',
+            icon: CupertinoIcons.person,
+          ),
+          AdminMenuItem(
+            title: 'دسته بندی ها',
+            route: '',
+            icon: Icons.category_outlined,
+          ),
+          AdminMenuItem(
+            title: 'بنر ها',
+            route: '',
+            icon: Icons.image,
+          ),
+        ],
+        selectedRoute: '',
+      ),
     );
   }
 }
