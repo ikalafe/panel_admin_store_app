@@ -29,7 +29,6 @@ class _MainScreenState extends State<MainScreen> {
         width: 260,
         items: [
           AdminMenuItem(
-
             title: 'فروشندگان',
             route: '',
             icon: CupertinoIcons.person_3,
@@ -40,14 +39,24 @@ class _MainScreenState extends State<MainScreen> {
             icon: CupertinoIcons.person,
           ),
           AdminMenuItem(
+            title: 'سفارشات',
+            route: '',
+            icon: CupertinoIcons.shopping_cart,
+          ),
+          AdminMenuItem(
             title: 'دسته بندی ها',
             route: '',
             icon: Icons.category_outlined,
           ),
           AdminMenuItem(
-            title: 'بنر ها',
+            title: 'آپلود بنر',
             route: '',
-            icon: Icons.image,
+            icon: CupertinoIcons.add,
+          ),
+          AdminMenuItem(
+            title: 'محصولات',
+            route: '',
+            icon: Icons.store,
           ),
         ],
         selectedRoute: '',
