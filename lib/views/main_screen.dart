@@ -1,6 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/buyers_screen.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/category_screen.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/orders_screen.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/products_screen.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/upload_banners_screen.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/vendors_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -10,6 +16,42 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Widget _selectedScreen = const VendorsScreen();
+  screenSelector(item) {
+    switch (item.route) {
+      case BuyersScreen.id:
+        setState(() {
+          _selectedScreen = const BuyersScreen();
+        });
+        break;
+      case VendorsScreen.id:
+        setState(() {
+          _selectedScreen = const VendorsScreen();
+        });
+        break;
+      case OrdersScreen.id:
+        setState(() {
+          _selectedScreen = const OrdersScreen();
+        });
+        break;
+      case CategoryScreen.id:
+        setState(() {
+          _selectedScreen = const CategoryScreen();
+        });
+        break;
+      case UploadBannersScreen.id:
+        setState(() {
+          _selectedScreen = const UploadBannersScreen();
+        });
+        break;
+      case ProductsScreen.id:
+        setState(() {
+          _selectedScreen = const ProductsScreen();
+        });
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AdminScaffold(
@@ -18,47 +60,59 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.white,
         title: const Text('مدیریت'),
       ),
-      body: const Text('داشبورد'),
-      sideBar: const SideBar(
+      body: _selectedScreen,
+      sideBar: SideBar(
         backgroundColor: Colors.white,
-        textStyle: TextStyle(fontSize: 28, color: Colors.black),
-        activeTextStyle: TextStyle(color: Colors.white, fontSize: 14),
-        activeIconColor: Colors.white,
-        activeBackgroundColor: Color(0xff003F62),
+        textStyle: const TextStyle(fontSize: 14, color: Colors.black),
         width: 260,
-        items: [
+        header: Container(
+          height: 50,
+          width: double.infinity,
+          decoration: const BoxDecoration(color: Colors.black),
+          child: const Center(
+            child: Text(
+              'پنل ادمین فروشندگان',
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+          ),
+        ),
+        items: const [
           AdminMenuItem(
             title: 'فروشندگان',
-            route: '',
+            route: VendorsScreen.id,
             icon: CupertinoIcons.person_3,
           ),
           AdminMenuItem(
             title: 'خریداران',
-            route: '',
+            route: BuyersScreen.id,
             icon: CupertinoIcons.person,
           ),
           AdminMenuItem(
             title: 'سفارشات',
-            route: '',
+            route: OrdersScreen.id,
             icon: CupertinoIcons.shopping_cart,
           ),
           AdminMenuItem(
             title: 'دسته بندی ها',
-            route: '',
+            route: CategoryScreen.id,
             icon: Icons.category_outlined,
           ),
           AdminMenuItem(
             title: 'آپلود بنر',
-            route: '',
+            route: UploadBannersScreen.id,
             icon: CupertinoIcons.add,
           ),
           AdminMenuItem(
             title: 'محصولات',
-            route: '',
+            route: ProductsScreen.id,
             icon: Icons.store,
           ),
         ],
-        selectedRoute: '',
+        selectedRoute: VendorsScreen.id,
+        onSelected: (item) => screenSelector(item),
       ),
     );
   }
