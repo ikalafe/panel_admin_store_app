@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pannel_admin_store_app/constants.dart';
+import 'package:pannel_admin_store_app/views/widgets/side_menu.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/buyers_screen.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/category_screen.dart';
@@ -16,42 +18,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  Widget _selectedScreen = const VendorsScreen();
-  screenSelector(item) {
-    switch (item.route) {
-      case BuyersScreen.id:
-        setState(() {
-          _selectedScreen = const BuyersScreen();
-        });
-        break;
-      case VendorsScreen.id:
-        setState(() {
-          _selectedScreen = const VendorsScreen();
-        });
-        break;
-      case OrdersScreen.id:
-        setState(() {
-          _selectedScreen = const OrdersScreen();
-        });
-        break;
-      case CategoryScreen.id:
-        setState(() {
-          _selectedScreen = const CategoryScreen();
-        });
-        break;
-      case UploadBannersScreen.id:
-        setState(() {
-          _selectedScreen = const UploadBannersScreen();
-        });
-        break;
-      case ProductsScreen.id:
-        setState(() {
-          _selectedScreen = const ProductsScreen();
-        });
-        break;
-    }
-  }
-
+  Widget _selectedScreen = const CategoryScreen();
   @override
   Widget build(BuildContext context) {
     return AdminScaffold(
@@ -63,10 +30,11 @@ class _MainScreenState extends State<MainScreen> {
       body: _selectedScreen,
       sideBar: SideBar(
         backgroundColor: Colors.white,
-        textStyle: const TextStyle(fontSize: 14, color: Colors.black),
+        textStyle: const TextStyle(
+            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
         width: 260,
         header: Container(
-          height: 50,
+          height: 62,
           width: double.infinity,
           decoration: const BoxDecoration(color: Colors.black),
           child: const Center(
@@ -101,9 +69,9 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icons.category_outlined,
           ),
           AdminMenuItem(
-            title: 'آپلود بنر',
+            title: 'بارگزاری بنر',
             route: UploadBannersScreen.id,
-            icon: CupertinoIcons.add,
+            icon: CupertinoIcons.cloud_upload,
           ),
           AdminMenuItem(
             title: 'محصولات',
@@ -115,5 +83,40 @@ class _MainScreenState extends State<MainScreen> {
         onSelected: (item) => screenSelector(item),
       ),
     );
+  }
+
+  screenSelector(item) {
+    switch (item.route) {
+      case BuyersScreen.id:
+        setState(() {
+          _selectedScreen = const BuyersScreen();
+        });
+        break;
+      case VendorsScreen.id:
+        setState(() {
+          _selectedScreen = const VendorsScreen();
+        });
+        break;
+      case OrdersScreen.id:
+        setState(() {
+          _selectedScreen = const OrdersScreen();
+        });
+        break;
+      case CategoryScreen.id:
+        setState(() {
+          _selectedScreen = const CategoryScreen();
+        });
+        break;
+      case UploadBannersScreen.id:
+        setState(() {
+          _selectedScreen = const UploadBannersScreen();
+        });
+        break;
+      case ProductsScreen.id:
+        setState(() {
+          _selectedScreen = const ProductsScreen();
+        });
+        break;
+    }
   }
 }
