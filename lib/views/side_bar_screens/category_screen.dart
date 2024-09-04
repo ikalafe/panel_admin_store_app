@@ -1,10 +1,28 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pannel_admin_store_app/constants.dart';
 
-class CategoryScreen extends StatelessWidget {
-  static const String id = '\category-screen';
+class CategoryScreen extends StatefulWidget {
+  static const String id = 'category-screen';
   const CategoryScreen({super.key});
+
+  @override
+  State<CategoryScreen> createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends State<CategoryScreen> {
+  dynamic _image;
+  pickImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+    if (result != null) {
+      setState(() {
+        _image = result.files.first.bytes;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +57,22 @@ class CategoryScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 alignment: Alignment.center,
-                child: const Text(
-                  'تصویر دسته بندی',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: _image != null
+                      ? Image.memory(
+                          _image,
+                          fit: BoxFit.cover,
+                          width: 170,
+                          height: 170,
+                        )
+                      : const Text(
+                          'تصویر دسته بندی',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
+                        ),
                 ),
               ),
             ),
@@ -86,7 +114,9 @@ class CategoryScreen extends StatelessWidget {
                           backgroundColor: const Color(0xff5796E4),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12))),
-                      onPressed: () {},
+                      onPressed: () {
+                        pickImage();
+                      },
                       icon: const Icon(
                         CupertinoIcons.cloud_upload,
                         color: Colors.white,
@@ -110,9 +140,11 @@ class CategoryScreen extends StatelessWidget {
                           shape:
                               WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                side:
-                                    const BorderSide(color: Color(0xff5796E4))),
+                              borderRadius: BorderRadius.circular(12),
+                              side: const BorderSide(
+                                color: Color(0xff5796E4),
+                              ),
+                            ),
                           ),
                         ),
                         onPressed: () {},
@@ -127,9 +159,11 @@ class CategoryScreen extends StatelessWidget {
                       height: 40,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12))),
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                         onPressed: () {},
                         child: const Text(
                           "ذخیره",

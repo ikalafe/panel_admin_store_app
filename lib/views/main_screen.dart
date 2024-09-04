@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pannel_admin_store_app/constants.dart';
-import 'package:pannel_admin_store_app/views/widgets/side_menu.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/buyers_screen.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/category_screen.dart';
