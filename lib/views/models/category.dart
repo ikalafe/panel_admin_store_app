@@ -36,4 +36,4 @@ class Category {
 
   factory Category.fromJson(String source) =>
       Category.fromMap(json.decode(source) as Map<String, dynamic>);
-}
+} 
