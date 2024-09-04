@@ -14,6 +14,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late String categoryName;
   dynamic _image;
+  dynamic _bannerImage;
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -22,6 +23,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
     if (result != null) {
       setState(() {
         _image = result.files.first.bytes;
+      });
+    }
+  }
+
+  pickBannerImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+    if (result != null) {
+      setState(() {
+        _bannerImage = result.files.first.bytes;
       });
     }
   }
@@ -51,34 +64,120 @@ class _CategoryScreenState extends State<CategoryScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 20),
-                child: Container(
-                  width: 170,
-                  height: 170,
-                  decoration: BoxDecoration(
-                    color: Colors.black38,
-                    borderRadius: BorderRadius.circular(16),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, right: 20),
+                    child: Container(
+                      width: 230,
+                      height: 170,
+                      decoration: BoxDecoration(
+                        color: Colors.black38,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      alignment: Alignment.center,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: _image != null
+                            ? Image.memory(
+                                _image,
+                                fit: BoxFit.cover,
+                                width: 230,
+                                height: 170,
+                              )
+                            : const Text(
+                                'تصویر دسته بندی',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                      ),
+                    ),
                   ),
-                  alignment: Alignment.center,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: _image != null
-                        ? Image.memory(
-                            _image,
-                            fit: BoxFit.cover,
-                            width: 170,
-                            height: 170,
-                          )
-                        : const Text(
-                            'تصویر دسته بندی',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20, top: 15),
+                    child: SizedBox(
+                      width: 230,
+                      height: 50,
+                      child: ElevatedButton.icon(
+                        label: const Text(
+                          "انتخاب تصویر دسته بندی",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff5796E4),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12))),
+                        onPressed: () {
+                          pickImage();
+                        },
+                        icon: const Icon(
+                          CupertinoIcons.cloud_upload,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, right: 20),
+                    child: Container(
+                      width: 230,
+                      height: 170,
+                      decoration: BoxDecoration(
+                        color: Colors.black38,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      alignment: Alignment.center,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: _bannerImage != null
+                            ? Image.memory(
+                                _bannerImage,
+                                fit: BoxFit.cover,
+                                width: 230,
+                                height: 170,
+                              )
+                            : const Text(
+                                'بنر دسته بندی',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20, top: 15),
+                    child: SizedBox(
+                      width: 230,
+                      height: 50,
+                      child: ElevatedButton.icon(
+                        label: const Text(
+                          "انتخاب بنر دسته بندی",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff5796E4),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12))),
+                        onPressed: () {
+                          pickBannerImage();
+                        },
+                        icon: const Icon(
+                          CupertinoIcons.cloud_upload,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Column(
                 children: [
@@ -112,39 +211,40 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20, top: 15),
-                    child: SizedBox(
-                      width: 230,
-                      height: 50,
-                      child: ElevatedButton.icon(
-                        label: const Text(
-                          "انتخاب و بارگزاری تصویر",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xff5796E4),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12))),
-                        onPressed: () {
-                          pickImage();
-                        },
-                        icon: const Icon(
-                          CupertinoIcons.cloud_upload,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     height: 15,
                   ),
-                  Row(
+                  Column(
                     children: [
                       Container(
                         padding: const EdgeInsets.only(right: 20),
-                        width: 120,
-                        height: 40,
+                        width: 250,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              debugPrint(categoryName);
+                            }
+                          },
+                          child: const Text(
+                            "ذخیره",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(right: 20),
+                        width: 250,
+                        height: 50,
                         child: TextButton(
                           style: ButtonStyle(
                             backgroundColor: WidgetStateProperty.all<Color>(
@@ -164,33 +264,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        height: 10,
                       ),
-                      SizedBox(
-                        width: 120,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              debugPrint(categoryName);
-                            }
-                          },
-                          child: const Text(
-                            "ذخیره",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      )
                     ],
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                 ],
               )
