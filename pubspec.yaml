@@ -39,6 +39,8 @@ dependencies:
   iconsax_flutter: ^1.0.0
   file_picker: ^8.1.2
   http: ^1.2.2
+  cloudinary_public: ^0.23.1
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +68,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - .env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
