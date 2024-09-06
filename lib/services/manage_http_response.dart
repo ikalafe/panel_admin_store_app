@@ -13,6 +13,9 @@ void manageHttpResponse({
     case 200: // Status code 200 indicates a successfull request
       onSuccess();
       break;
+    case 201:
+      onSuccess();
+      break;
     case 400: // Status code 400 indicates a bad request
       showSnackBar(context, json.decode(response.body)['msg']);
       break;
@@ -25,6 +28,10 @@ void manageHttpResponse({
   }
 }
 
-void showSnackBar(BuildContext context, String title) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(title)));
+void showSnackBar(BuildContext context, String title,
+    {Color? backgroundColorSnackBar}) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(title),
+    backgroundColor: backgroundColorSnackBar,
+  ));
 }
