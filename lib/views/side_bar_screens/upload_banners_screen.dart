@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pannel_admin_store_app/controller/banner_controller.dart';
 
 class UploadBannersScreen extends StatefulWidget {
   static const String id = '\banner-screen';
@@ -11,6 +12,7 @@ class UploadBannersScreen extends StatefulWidget {
 }
 
 class _UploadBannersScreenState extends State<UploadBannersScreen> {
+  final BannerController _bannerController = BannerController();
   dynamic _image;
   dynamic _bannerImage;
   late String name;
@@ -89,9 +91,11 @@ class _UploadBannersScreenState extends State<UploadBannersScreen> {
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff5796E4),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12))),
+                    backgroundColor: const Color(0xff5796E4),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                   onPressed: () {
                     pickImage();
                   },
@@ -117,14 +121,10 @@ class _UploadBannersScreenState extends State<UploadBannersScreen> {
                   ),
                 ),
                 onPressed: () async {
-                  // if (_formKey.currentState!.validate()) {
-                  //   _categoryController.uploadCategory(
-                  //     pickedImage: _image,
-                  //     pickedBanner: _bannerImage,
-                  //     context: context,
-                  //     name: name,
-                  //   );
-                  // }
+                  await _bannerController.uploadImage(
+                    pickedImage: _image,
+                    context: context,
+                  );
                 },
                 child: const Text(
                   "ذخیره",
