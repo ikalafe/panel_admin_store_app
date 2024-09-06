@@ -68,6 +68,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             children: [
               Column(
                 children: [
+                  
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, right: 20),
                     child: Container(
