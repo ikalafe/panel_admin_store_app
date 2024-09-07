@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pannel_admin_store_app/controller/banner_controller.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/banner_widget.dart';
 
 class UploadBannersScreen extends StatefulWidget {
   static const String id = '\banner-screen';
@@ -132,7 +133,16 @@ class _UploadBannersScreenState extends State<UploadBannersScreen> {
               ),
             ),
           ],
-        )
+        ),
+        Divider(
+          color: Colors.grey.shade400,
+        ),
+        const SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(right: 20.0, top: 20),
+            child: BannerWidget(),
+          ),
+        ),
       ],
     );
   }

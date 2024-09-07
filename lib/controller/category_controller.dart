@@ -55,4 +55,5 @@ class CategoryController {
       debugPrint('Error Uploading to cloudinary: $e');
     }
   }
+  
 }

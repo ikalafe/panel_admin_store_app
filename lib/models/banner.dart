@@ -16,7 +16,7 @@ class BannerModel {
     };
   }
 
-  factory BannerModel.fromMap(Map<String, dynamic> map) {
+  factory BannerModel.fromJson(Map<String, dynamic> map) {
     return BannerModel(
       id: map['_id'] as String,
       image: map['image'] as String,
@@ -24,8 +24,4 @@ class BannerModel {
   }
 
   String toJson() => json.encode(toMap());
-
-  factory BannerModel.fromJson(String source) => BannerModel.fromMap(
-        json.decode(source) as Map<String, dynamic>,
-      );
 }

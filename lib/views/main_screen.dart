@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  Widget _selectedScreen = const UploadBannersScreen();
+  Widget _selectedScreen = const VendorsScreen();
   @override
   Widget build(BuildContext context) {
     return AdminScaffold(
