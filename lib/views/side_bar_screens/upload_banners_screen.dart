@@ -14,7 +14,6 @@ class UploadBannersScreen extends StatefulWidget {
 class _UploadBannersScreenState extends State<UploadBannersScreen> {
   final BannerController _bannerController = BannerController();
   dynamic _image;
-  dynamic _bannerImage;
   late String name;
   pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
