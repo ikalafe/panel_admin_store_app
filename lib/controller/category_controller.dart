@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -55,5 +57,28 @@ class CategoryController {
       debugPrint('Error Uploading to cloudinary: $e');
     }
   }
-  
+
+  // Load th uploaded categories
+  Future<List<Category>> loadCategories() async {
+    try {
+      // Send an http get request to load the categories
+      http.Response response = await http.get(
+        Uri.parse('$uri/api/categories'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      debugPrint(response.body);
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        List<Category> categories =
+            data.map((category) => Category.fromJson(category)).toList();
+        return categories;
+      } else {
+        throw Exception('خطایی در بارگزاری دسته بندی ها به وجود آمد ):');
+      }
+    } catch (e) {
+      throw Exception('Error Loading Categories $e');
+    }
+  }
 }
