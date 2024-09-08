@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -55,6 +57,31 @@ class SubcategoryController {
       );
     } catch (e) {
       debugPrint("در بارگزاری زیر مجموعه دسته بندی مشکلی پیش آمد: $e");
+    }
+  }
+
+  Future<List<Subcategory>> loadSubcateogries() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$uri/api/subcategories'),
+        headers: <String, String>{
+          'Content-Type': 'applicaton/json; charset=UTF-8'
+        },
+      );
+      debugPrint('زیر مجموعه دسته بندی ها: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        List<Subcategory> subcategories = data
+            .map((subcategory) => Subcategory.fromJson(subcategory))
+            .toList();
+        return subcategories;
+      } else {
+        throw Exception('مشکلی در بارگزاری زیرمجموعه دسته بندی ها رخ داد ):');
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
+      throw Exception('Error loading Subcategories: $e');
     }
   }
 }
