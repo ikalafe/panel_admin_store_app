@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pannel_admin_store_app/controller/category_controller.dart';
+import 'package:pannel_admin_store_app/controller/subcategory_controller.dart';
 import 'package:pannel_admin_store_app/models/category.dart';
 
 class SubcategoryScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class SubcategoryScreen extends StatefulWidget {
 }
 
 class _SubcategoryScreenState extends State<SubcategoryScreen> {
+  final SubcategoryController subcategoryController = SubcategoryController();
   late Future<List<Category>> futureCategories;
   late String name;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -150,6 +152,7 @@ class _SubcategoryScreenState extends State<SubcategoryScreen> {
                               horizontal: 20,
                             ),
                             child: DropdownButton<Category>(
+                              value: selectedCategory,
                               borderRadius: BorderRadius.circular(16),
                               dropdownColor: const Color(0xff5796E4),
                               icon: const Icon(
@@ -234,7 +237,19 @@ class _SubcategoryScreenState extends State<SubcategoryScreen> {
                         ),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState!.validate()) {}
+                        if (_formKey.currentState!.validate()) {
+                          await subcategoryController.uploadSubcategory(
+                            categoryId: selectedCategory!.id,
+                            categoryName: selectedCategory!.name,
+                            pickedImage: _image,
+                            subCategoryName: name,
+                            context: context,
+                          );
+                          setState(() {
+                            _formKey.currentState!.reset();
+                            _image = null;
+                          });
+                        }
                       },
                       child: const Text(
                         "ذخیره",
