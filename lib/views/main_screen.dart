@@ -17,7 +17,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  Widget _selectedScreen = const VendorsScreen();
+  Widget _selectedScreen = const SubcategoryScreen();
   @override
   Widget build(BuildContext context) {
     return AdminScaffold(
@@ -62,7 +62,6 @@ class _MainScreenState extends State<MainScreen> {
             route: OrdersScreen.id,
             icon: CupertinoIcons.shopping_cart,
           ),
-          
           AdminMenuItem(
             title: 'دسته بندی ها',
             route: CategoryScreen.id,
