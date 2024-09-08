@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pannel_admin_store_app/controller/banner_controller.dart';
-import 'package:pannel_admin_store_app/views/side_bar_screens/banner_widget.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/widgets/banner_widget.dart';
 
 class UploadBannersScreen extends StatefulWidget {
   static const String id = '\banner-screen';

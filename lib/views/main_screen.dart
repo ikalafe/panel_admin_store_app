@@ -5,6 +5,7 @@ import 'package:pannel_admin_store_app/views/side_bar_screens/buyers_screen.dart
 import 'package:pannel_admin_store_app/views/side_bar_screens/category_screen.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/orders_screen.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/products_screen.dart';
+import 'package:pannel_admin_store_app/views/side_bar_screens/subcategory_screen.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/upload_banners_screen.dart';
 import 'package:pannel_admin_store_app/views/side_bar_screens/vendors_screen.dart';
 
@@ -61,10 +62,16 @@ class _MainScreenState extends State<MainScreen> {
             route: OrdersScreen.id,
             icon: CupertinoIcons.shopping_cart,
           ),
+          
           AdminMenuItem(
             title: 'دسته بندی ها',
             route: CategoryScreen.id,
             icon: Icons.category_outlined,
+          ),
+          AdminMenuItem(
+            title: 'زیر مجموعه دسته مندی',
+            route: SubcategoryScreen.id,
+            icon: Icons.auto_awesome_motion,
           ),
           AdminMenuItem(
             title: 'بارگزاری بنر',
@@ -103,6 +110,11 @@ class _MainScreenState extends State<MainScreen> {
       case CategoryScreen.id:
         setState(() {
           _selectedScreen = const CategoryScreen();
+        });
+        break;
+      case SubcategoryScreen.id:
+        setState(() {
+          _selectedScreen = const SubcategoryScreen();
         });
         break;
       case UploadBannersScreen.id:
